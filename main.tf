@@ -51,40 +51,40 @@ module "s3" {
   source = "./modules/s3"
 }
 
-module "load_file" {
-  source = "./modules/load_file"
-  s3_name = "${module.s3.s3_name}"
-  source_path = "./content"
-}
+# module "load_file" {
+#   source = "./modules/load_file"
+#   s3_name = "${module.s3.s3_name}"
+#   source_path = "./content"
+# }
 
-module "ec2_1a" {
-  source = "./modules/ec2"
-  instance_type = "${var.instance_type}"
-  ami = "${var.ami}"
-  admin_password = "${var.admin_password}"
-  subnet_id = "${module.subnet_1a.subnet_id}"
-  availability_zone = "${element(var.availability_zone, 0)}"
-  sg_id = "${module.sg.sg_id}"
-  ec2_profile = "${module.iam.ec2_profile}"
-}
+# module "ec2_1a" {
+#   source = "./modules/ec2"
+#   instance_type = "${var.instance_type}"
+#   ami = "${var.ami}"
+#   admin_password = "${var.admin_password}"
+#   subnet_id = "${module.subnet_1a.subnet_id}"
+#   availability_zone = "${element(var.availability_zone, 0)}"
+#   sg_id = "${module.sg.sg_id}"
+#   ec2_profile = "${module.iam.ec2_profile}"
+# }
 
-module "ec2_1b" {
-  source = "./modules/ec2"
-  instance_type = "${var.instance_type}"
-  ami = "${var.ami}"
-  admin_password = "${var.admin_password}"
-  subnet_id = "${module.subnet_1b.subnet_id}"
-  availability_zone = "${element(var.availability_zone, 1)}"
-  sg_id = "${module.sg.sg_id}"
-  ec2_profile = "${module.iam.ec2_profile}"
-}
+# module "ec2_1b" {
+#   source = "./modules/ec2"
+#   instance_type = "${var.instance_type}"
+#   ami = "${var.ami}"
+#   admin_password = "${var.admin_password}"
+#   subnet_id = "${module.subnet_1b.subnet_id}"
+#   availability_zone = "${element(var.availability_zone, 1)}"
+#   sg_id = "${module.sg.sg_id}"
+#   ec2_profile = "${module.iam.ec2_profile}"
+# }
 
-module "loadbalancer" {
-  source = "./modules/alb"
-  security_group_id = "${module.sg.sg_id}"
-  subnet_id = [
-    "${module.subnet_1a.subnet_id}",
-    "${module.subnet_1b.subnet_id}"
-  ]
-  s3_name = "${module.s3.s3_name}"
-}
+# module "loadbalancer" {
+#   source = "./modules/alb"
+#   security_group_id = "${module.sg.sg_id}"
+#   subnet_id = [
+#     "${module.subnet_1a.subnet_id}",
+#     "${module.subnet_1b.subnet_id}"
+#   ]
+#   s3_name = "${module.s3.s3_name}"
+# }
