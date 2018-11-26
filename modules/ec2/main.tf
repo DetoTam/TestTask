@@ -29,3 +29,6 @@ resource "aws_instance" "server2016" {
     </powershell>
     EOF
 }
+output "aws_instance_id" {
+  value = "${aws_instance.server2016.id}"
+}
