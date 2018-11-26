@@ -10,5 +10,5 @@ resource "aws_s3_bucket_object" "object" {
 }
 
 output "s3_name" {
-    value = "${aws_s3_bucket.test.bucket}"
+    value = "${aws_s3_bucket.str.bucket}"
 }
