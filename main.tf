@@ -6,6 +6,7 @@ provider "aws" {
 module "network" {
   source = "./modules/network"
   vpc_cird = "${var.vpc_cird}"
+  route_cird = "${var.route_cird}"
 }
 
 module "subnet_1a" {
@@ -37,6 +38,7 @@ module "route_association_1b" {
 module "sg" {
   source = "./modules/sg"
   vpc_id = "${module.network.vpc_id}"
+  cidr_blocks = "${var.vpc_cird}"
 }
 
 module "iam" {
@@ -81,11 +83,13 @@ module "ec2_1b" {
 }
 
 module "loadbalancer" {
-  source = "./modules/elb"
-  aws_instance_id = [
-    "${module.ec2_1a.aws_instance_id}",
-    "${module.ec2_1b.aws_instance_id}",
-  ]
+  source = "./modules/alb"
   s3_name = "${module.s3.s3_name}"
+  security_groups_id = "${module.sg.sg_id}"
+  vpc_id = "${module.network.vpc_id}"
+  target_id = "${module.ec2_1a.aws_instance_id}, ${module.ec2_1b.aws_instance_id}"
+  subnet_id = "${module.subnet_1a.subnet_id}, ${module.subnet_1b.subnet_id}"
+
+
   
 }

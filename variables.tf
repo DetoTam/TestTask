@@ -2,7 +2,7 @@ variable "name" {
   default = "str"
 }
 variable "region" {
-  default = "eu-west-2"
+  default = "eu-west-1"
 }
 
 variable "instance_type" {
@@ -10,7 +10,7 @@ variable "instance_type" {
 }
 
 variable "ami" {
-  default = "ami-028779930ada5200c"
+  default = "ami-0d138b26f46625e2f"
 }
 
 variable "admin_password" {
@@ -28,6 +28,10 @@ variable "vpc_cird" {
   default = "10.0.0.0/16"
   description = "VPC cird block"
 }
+variable "route_cird" {
+  default = "10.1.0.0/22"
+  description = "VPC cird block"
+}
 variable "subnet_cird" {
   type = "list"
   default = ["10.0.1.0/24", "10.0.2.0/24"]
@@ -35,7 +39,7 @@ variable "subnet_cird" {
 }
 variable "availability_zone" {
   type = "list"
-  default = ["us-east-1a", "us-east-1b"]
+  default = ["eu-west-1a", "eu-west-1b"]
   description = "Availability zone"
 }
 

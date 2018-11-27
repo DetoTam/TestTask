@@ -16,7 +16,7 @@ resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.str.id}"
 
   route {
-    cidr_block = "${var.vpc_cird}"
+    cidr_block = "${var.route_cird}"
     gateway_id = "${aws_internet_gateway.public.id}"
   }
   tags {

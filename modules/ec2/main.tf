@@ -1,4 +1,4 @@
-resource "aws_instance" "server2016" {
+resource "aws_instance" "server" {
   connection {
     type     = "winrm"
     user     = "Administrator"
@@ -30,5 +30,5 @@ resource "aws_instance" "server2016" {
     EOF
 }
 output "aws_instance_id" {
-  value = "${aws_instance.server2016.id}"
+  value = "${aws_instance.server.id}"
 }

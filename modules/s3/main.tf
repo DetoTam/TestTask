@@ -1,10 +1,10 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket = "${var.name}_bucket_tst"
+  bucket = "${var.name}-bucket-tst"
   acl    = "private"
 
   tags {
-    Name        = "${var.name}_bucket"
-    Environment = "TST"
+    Name        = "${var.name}-bucket-tst"
+    Environment = "tst"
   }
 }
 
