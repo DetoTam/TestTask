@@ -1,3 +1,5 @@
 .terraform
 terraform.exe
 .pem
+.tfstate
+.tfstate.backup
