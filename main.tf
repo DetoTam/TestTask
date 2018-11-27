@@ -1,7 +1,7 @@
 provider "aws" {
   region = "${var.region}"
-  access_key = "${var.acces_key}"
-  secret_key = "${var.secret_key}"
+  #access_key = "${var.acces_key}"
+  #secret_key = "${var.secret_key}"
 }
 module "network" {
   source = "./modules/network"
@@ -51,11 +51,12 @@ module "s3" {
   source = "./modules/s3"
 }
 
-# module "load_file" {
-#   source = "./modules/load_file"
-#   s3_name = "${module.s3.s3_name}"
-#   source_path = "./content"
-# }
+module "load_file" {
+  source = "./modules/load_file"
+  s3_name = "${module.s3.s3_name}"
+  key_name_file = "${var.key_name_file}"
+  source_s3_path = "${var.source_s3_path}"
+}
 
 module "ec2_1a" {
   source = "./modules/ec2"
@@ -80,13 +81,11 @@ module "ec2_1b" {
 }
 
 module "loadbalancer" {
-  source = "./modules/alb"
+  source = "./modules/elb"
   aws_instance_id = [
     "${module.ec2_1a.aws_instance_id}",
     "${module.ec2_1b.aws_instance_id}",
   ]
-  availability_zone = [
-    "${element(var.availability_zone, 0)}",
-    "${element(var.availability_zone, 1)}",
-  ]
+  s3_name = "${module.s3.s3_name}"
+  
 }

@@ -2,10 +2,11 @@
 resource "aws_elb" "bar" {
   name               = "${var.name}-terraform-elb"
   availability_zone = ["${element(var.availability_zone, 0)}", "${element(var.availability_zone, 1)}"]
+  
 
   access_logs {
-    bucket        = "foo"
-    bucket_prefix = "bar"
+    bucket        = "${var.s3_name}"
+    bucket_prefix = "log"
     interval      = 60
   }
 

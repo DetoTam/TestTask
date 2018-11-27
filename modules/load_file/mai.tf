@@ -1,5 +1,5 @@
-resource "aws_s3_bucket" "object" {
+resource "aws_s3_bucket_object" "object" {
   bucket = "${var.s3_name}"
-  source = "${var.source_path}"
-  
-}
+  key = "${var.key_name_file}"
+  source = "${var.source_s3_path}"
+} 

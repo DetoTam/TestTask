@@ -2,7 +2,7 @@ variable "name" {
   default = "str"
 }
 variable "region" {
-  default = "us-east-1"
+  default = "eu-west-2"
 }
 
 variable "instance_type" {
@@ -17,13 +17,13 @@ variable "admin_password" {
   description = "Windows Administrator password to login as."
   default = "123Abc+-=" 
 }
-variable "acces_key" {
-  default = "******"
-}
+# variable "acces_key" {
+#   default = "******"
+# }
 
-variable "secret_key" {
-  default = "******"
-}
+# variable "secret_key" {
+#   default = "******"
+#}
 variable "vpc_cird" {
   default = "10.0.0.0/16"
   description = "VPC cird block"
@@ -39,3 +39,12 @@ variable "availability_zone" {
   description = "Availability zone"
 }
 
+variable "key_name_file" {
+  description = "The name of the object once it is in the bucket"
+  default = "index.html"
+}
+
+variable "source_s3_path" {
+  description = "The path to a file that will be read and uploaded as raw bytes for the object content"
+  default = "./content"
+}

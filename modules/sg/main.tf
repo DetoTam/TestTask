@@ -3,7 +3,7 @@ resource "aws_security_group" "sg" {
   description = "str"
   vpc_id = "${var.vpc_id}"
   tags {
-    Name = ["${var.name}_sg"]
+    Name = "${var.name}_sg"
   }
   
 
