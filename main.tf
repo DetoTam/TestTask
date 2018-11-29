@@ -64,7 +64,10 @@ module "ec2_1a" {
   source = "./modules/ec2"
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
+  root_volume_size = "${var.root_volume_size}"
+  root_volume_type = "${var.root_volume_type}"
   admin_password = "${var.admin_password}"
+  instance_username = "${var.instance_username}"
   subnet_id = "${module.subnet_1a.subnet_id}"
   availability_zone = "${element(var.availability_zone, 0)}"
   sg_id = "${module.sg.sg_id}"
@@ -75,7 +78,10 @@ module "ec2_1b" {
   source = "./modules/ec2"
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
+  root_volume_size = "${var.root_volume_size}"
+  root_volume_type = "${var.root_volume_type}"
   admin_password = "${var.admin_password}"
+  instance_username = "${var.instance_username}"
   subnet_id = "${module.subnet_1b.subnet_id}"
   availability_zone = "${element(var.availability_zone, 1)}"
   sg_id = "${module.sg.sg_id}"
@@ -87,8 +93,8 @@ module "loadbalancer" {
   s3_name = "${module.s3.s3_name}"
   security_groups_id = "${module.sg.sg_id}"
   vpc_id = "${module.network.vpc_id}"
-  target_id = "${module.ec2_1a.aws_instance_id}, ${module.ec2_1b.aws_instance_id}"
-  subnet_id = "${module.subnet_1a.subnet_id}, ${module.subnet_1b.subnet_id}"
+  target_id = ["${module.ec2_1a.aws_instance_id}", "${module.ec2_1b.aws_instance_id}"]
+  subnet_id = ["${module.subnet_1a.subnet_id}", "${module.subnet_1b.subnet_id}"]
 
 
   

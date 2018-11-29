@@ -52,6 +52,7 @@ resource "aws_iam_policy" "policy_sqs" {
 }
 EOF
 }
+
 resource "aws_iam_role_policy_attachment" "s3toec2" {
     role       = "${aws_iam_role.role_ec2.name}"
     policy_arn = "${aws_iam_policy.policy_s3.arn}"

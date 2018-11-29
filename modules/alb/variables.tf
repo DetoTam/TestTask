@@ -8,10 +8,14 @@ variable "security_groups_id" {
 
 variable "vpc_id" {}
 
-variable "subnet_id" {}
+variable "subnet_id" {
+  type = "list"
+}
 
 variable "s3_name" {}
 
-variable "target_id" {}
+variable "target_id" {
+  type = "list"
+}
 
 

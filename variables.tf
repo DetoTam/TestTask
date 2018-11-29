@@ -12,11 +12,22 @@ variable "instance_type" {
 variable "ami" {
   default = "ami-0d138b26f46625e2f"
 }
+variable "root_volume_size" {
+  default = "30"
+}
+variable "root_volume_type" {
+  default = "gp2"
+}
 
 variable "admin_password" {
   description = "Windows Administrator password to login as."
   default = "123Abc+-=" 
 }
+
+variable "instance_username" {
+ default = "admin" 
+}
+
 # variable "acces_key" {
 #   default = "******"
 # }
@@ -50,5 +61,5 @@ variable "key_name_file" {
 
 variable "source_s3_path" {
   description = "The path to a file that will be read and uploaded as raw bytes for the object content"
-  default = "./content"
+  default = "./content/index.html"
 }
