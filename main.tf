@@ -5,12 +5,14 @@ provider "aws" {
 }
 module "network" {
   source = "./modules/network"
+  name = "${var.name}"
   vpc_cird = "${var.vpc_cird}"
   route_cird = "${var.route_cird}"
 }
 
 module "subnet_1a" {
   source = "./modules/subnet"
+  name = "${var.name}"
   vpc_id = "${module.network.vpc_id}"
   cidr_block = "${element(var.subnet_cird, 0)}"
   availability_zone = "${element(var.availability_zone, 0)}"
@@ -18,6 +20,7 @@ module "subnet_1a" {
 
 module "subnet_1b" {
   source = "./modules/subnet"
+  name = "${var.name}"
   vpc_id = "${module.network.vpc_id}"
   cidr_block = "${element(var.subnet_cird, 1)}"
   availability_zone = "${element(var.availability_zone, 1)}"
@@ -25,36 +28,43 @@ module "subnet_1b" {
 
 module "route_association_1a" {
   source = "./modules/route_association"
+  name = "${var.name}"
   route_table_id = "${module.network.route_table_id}"
   subnet_id = "${module.subnet_1a.subnet_id}"
 }
 
 module "route_association_1b" {
   source = "./modules/route_association"
+  name = "${var.name}"
   route_table_id = "${module.network.route_table_id}"
   subnet_id = "${module.subnet_1b.subnet_id}"
 }
 
 module "sg" {
   source = "./modules/sg"
+  name = "${var.name}"
   vpc_id = "${module.network.vpc_id}"
   cidr_blocks = "${var.vpc_cird}"
 }
 
 module "iam" {
   source = "./modules/iam"
+  name = "${var.name}"
   s3_name = "${module.s3.s3_name}"
   sqs_name = "${module.sqs.aws_sqs_queue_name}"
 }
 module "sqs" {
   source = "./modules/sqs"
+  name = "${var.name}"
 }
 module "s3" {
   source = "./modules/s3"
+  name = "${var.name}"
 }
 
 module "load_file" {
   source = "./modules/load_file"
+  name = "${var.name}"
   s3_name = "${module.s3.s3_name}"
   key_name_file = "${var.key_name_file}"
   source_s3_path = "${var.source_s3_path}"
@@ -62,6 +72,8 @@ module "load_file" {
 
 module "ec2_1a" {
   source = "./modules/ec2"
+  name = "${var.name}"
+  public_key = "${var.public_key}"
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
   root_volume_size = "${var.root_volume_size}"
@@ -76,6 +88,8 @@ module "ec2_1a" {
 
 module "ec2_1b" {
   source = "./modules/ec2"
+  name = "${var.name}"
+  public_key = "${var.public_key}"
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
   root_volume_size = "${var.root_volume_size}"
@@ -90,12 +104,11 @@ module "ec2_1b" {
 
 module "loadbalancer" {
   source = "./modules/alb"
+  name = "${var.name}"
   s3_name = "${module.s3.s3_name}"
   security_groups_id = "${module.sg.sg_id}"
   vpc_id = "${module.network.vpc_id}"
   target_id = ["${module.ec2_1a.aws_instance_id}", "${module.ec2_1b.aws_instance_id}"]
   subnet_id = ["${module.subnet_1a.subnet_id}", "${module.subnet_1b.subnet_id}"]
-
-
-  
+ 
 }

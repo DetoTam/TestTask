@@ -1,6 +1,4 @@
-variable "name" {
-  default = "str"
-}
+variable "name" {}
 
 variable "route_table_id" {}
 

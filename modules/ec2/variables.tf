@@ -1,6 +1,5 @@
-variable "name" {
-  default = "str"
-}
+variable "name" {}
+variable "public_key" {}
 variable "instance_username" {}
 variable "admin_password" {}
 variable "instance_type" {}

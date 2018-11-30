@@ -1,7 +1,4 @@
-variable "name" {
-  default = "str"
-}
-
+variable "name" {}
 variable "security_groups_id" {
   description = "A list of security group IDs to assign to the LB"
   }

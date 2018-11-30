@@ -19,8 +19,8 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["${var.cidr_blocks}"]
   }
   ingress {
-    from_port   = 443
-    to_port     = 443
+    from_port   = 5555
+    to_port     = 5555
     protocol    = "TCP"
     cidr_blocks = ["${var.cidr_blocks}"]
   }

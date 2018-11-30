@@ -1,12 +1,16 @@
 variable "name" {
-  default = "str"
+  default = "deto"
 }
+variable "public_key" {
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAkCunLXXp+/jOWtzFjWxGMdMOxz13iGHXihJEvQGeAyr4mvlrGXuGpToOJRHvUBU4IxFw5gLZBkvex4Qd3oIon60wh/sTSOcSiJToMVH/F5OyDauQmNKY0RiDPm+p2ZinvhdcH2zKER2r2gBx1ryCS4bXbsy+oRRb5d2N+3RlkKdHNLXlTyLOgfTO+XemxsJqHpSTQcb8fW5+oYFhD3JDiE49G+Z+qAKnD9xNwTaBMrA7fSPosRyG3QUGhS5cSmzhzH4XM10KGiscgmBIbyD0XXCayYH+qMC5egMFiw70Cm1IxtfoQMXAAtBB03vmxTXwjZCRQfzUTapNzqzt5eTsVQ== roman.zhulia@globallogic.com"
+}
+
 variable "region" {
   default = "eu-west-1"
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = "m4.large"
 }
 
 variable "ami" {

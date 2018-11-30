@@ -1,3 +1,4 @@
+variable "name" {}
 variable "s3_name" {}
 variable "key_name_file" {
   description = "The name of the object once it is in the bucket"
