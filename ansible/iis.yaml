@@ -22,7 +22,7 @@
     - name: Download webpage
       win_get_url:
         url: 'url to your webpage'
-        dest: 'C:/inetpub/wwwroot/index.html'
+        dest: '../../con/index.html'
       notify:
 
       - w3svc reset
