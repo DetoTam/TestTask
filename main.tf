@@ -70,16 +70,16 @@ module "load_file" {
   source_s3_path = "${var.source_s3_path}"
 }
 
-module "key_pair" {
-  source = "./modules/key_pair"
-  name = "${var.name}"
-  public_key = "${var.public_key}"
-}
+# module "key_pair" {
+#   source = "./modules/key_pair"
+#   name = "${var.name}"
+#   public_key = "${var.public_key}"
+# }
 
 module "ec2_1a" {
   source = "./modules/ec2"
   name = "${var.name}"
-  key_name = "${module.key_pair.key_name}"
+  key_name = "deto_key"
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
   root_volume_size = "${var.root_volume_size}"
@@ -95,7 +95,7 @@ module "ec2_1a" {
 module "ec2_1b" {
   source = "./modules/ec2"
   name = "${var.name}"
-  key_name = "${module.key_pair.key_name}"
+  key_name = "deto_key"
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
   root_volume_size = "${var.root_volume_size}"
