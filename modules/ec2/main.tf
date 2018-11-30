@@ -1,10 +1,6 @@
-resource "aws_key_pair" "key" {
-  key_name   = "${var.name}-key"
-  public_key = "${var.public_key}"
-}
 resource "aws_instance" "ec2-instance" {
   availability_zone           = "${var.availability_zone}"
-  key_name                    = "${aws_key_pair.key.key_name}"
+  key_name                    = "${var.key_name}"
   instance_type               = "${var.instance_type}"
   ami                         = "${var.ami}"
   subnet_id                   = "${var.subnet_id}"

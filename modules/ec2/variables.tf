@@ -1,5 +1,5 @@
 variable "name" {}
-variable "public_key" {}
+variable "key_name" {}
 variable "instance_username" {}
 variable "admin_password" {}
 variable "instance_type" {}
