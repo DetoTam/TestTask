@@ -1,0 +1,40 @@
+---
+- hosts: windows
+
+  tasks:
+    - name: Test connection
+      win_ping:
+
+# Restart snmp
+    - name: Ensuring SNMP is started
+      win_service:
+        name: snmptrap
+        state: started
+
+    - name: Installing IIS
+      win_feature:
+        name: "Web-Server"
+        state: present
+        restart: yes
+        include_sub_features: yes
+        include_management_tools: yes
+
+    - name: Download webpage
+      win_get_url:
+        url: 'url to your webpage'
+        dest: 'C:/inetpub/wwwroot/index.html'
+      notify:
+
+      - w3svc reset
+
+    - name: Restarting the web app pool
+      win_iis_webapppool:
+         name: "DefaultAppPool"
+         state: restarted
+
+  handlers:
+
+    - name: w3svc reset
+      win_service:
+        name: w3svc
+        state: restarted
