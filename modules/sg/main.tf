@@ -7,20 +7,32 @@ resource "aws_security_group" "sg" {
   }
   
   ingress {
-    from_port   = 3389
-    to_port     = 3389
-    protocol    = "TCP"
-    cidr_blocks = ["${var.cidr_blocks}"]
-  }
-  ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "TCP"
     cidr_blocks = ["${var.cidr_blocks}"]
   }
   ingress {
-    from_port   = 5555
+    from_port   = 3389
+    to_port     = 3389
+    protocol    = "TCP"
+    cidr_blocks = ["${var.cidr_blocks}"]
+  }
+  ingress {
+    from_port   = 5555 #443
     to_port     = 5555
+    protocol    = "TCP"
+    cidr_blocks = ["${var.cidr_blocks}"]
+  }
+  ingress {
+    from_port   = 5985 #winrm
+    to_port     = 5985
+    protocol    = "TCP"
+    cidr_blocks = ["${var.cidr_blocks}"]
+  }
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "TCP"
     cidr_blocks = ["${var.cidr_blocks}"]
   }
@@ -29,7 +41,6 @@ resource "aws_security_group" "sg" {
     to_port         = 0
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
-
   }
   tags {
     Name = "${var.name}-alb-security-group"
