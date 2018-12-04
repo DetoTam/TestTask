@@ -1,6 +1,6 @@
 ---
-ansible_ssh_user: admin
-ansible_ssh_pass: 123Abc+-=
-ansible_ssh_port: 5985
+ansible_user: admin
+ansible_password: 123Abc+-=
+ansible_port: 5985
 ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore
