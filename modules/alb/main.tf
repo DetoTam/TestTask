@@ -5,11 +5,7 @@ resource "aws_lb" "alb" {
   security_groups    = ["${var.security_groups_id}"]
   subnets            = ["${element(var.subnet_id, 0)}", "${element(var.subnet_id, 1)}"]
   enable_deletion_protection = true
-  # access_logs {
-  #   bucket  = "${var.s3_name}"
-  #   prefix  = "test-lb"
-  #   enabled = true
-  # }
+
   tags {
     Environment = "tst"
   }
@@ -36,9 +32,7 @@ resource "aws_lb_listener" "alb" {
   load_balancer_arn = "${aws_lb.alb.arn}"
   port              = "5555"
   protocol          = "HTTP"
-  #ssl_policy        = "ELBSecurityPolicy-2015-05"
-  #certificate_arn   = ""
-
+  
   default_action {
     type             = "forward"
     target_group_arn = "${aws_lb_target_group.alb.arn}"

@@ -1,8 +1,8 @@
 resource "aws_key_pair" "key" {
-  key_name   = "${var.name}-key"
-  public_key = "${var.public_key}"
+  key_name = "project_key_deto"
+  public_key = "${file("${var.key_path}")}"
 }
 
-output "key_name" {
-  value = "${aws_key_pair.key.key_name}"
+output "key_pair_id" {
+  value = "${aws_key_pair.key.id}"
 }

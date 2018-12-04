@@ -1,24 +1,26 @@
 resource "aws_vpc" "str" {
   cidr_block       = "${var.vpc_cird}"
-  instance_tenancy = "dedicated"
-
+  instance_tenancy = "default"
+  enable_dns_hostnames = true
   tags {
     Name = "${var.name}_vpc"
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
 resource "aws_internet_gateway" "public" {
   vpc_id = "${aws_vpc.str.id}"
-  tags { Name = "${var.name}_gateway" }
+  tags { Name = "Public Gateway ${var.name}-gateway" }
 }
-
 resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.str.id}"
-
   route {
-    cidr_block = "${var.route_cird}"
+    cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.public.id}"
   }
+
   tags {
     Name = "${var.name}_route_table"
   }

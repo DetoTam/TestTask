@@ -1,12 +1,26 @@
 ---
-- name: Install IIS
-  hosts: all
-  gather_facts: false
+- hosts: windows
+
   tasks:
-    - name: Install IIS
+    - name: Test connection
+      win_ping:
+
+# Restart snmp
+    - name: Ensuring SNMP is started
+      win_service:
+        name: snmptrap
+        state: started
+
+    - name: Installing IIS
       win_feature:
         name: "Web-Server"
+        port: 8080
         state: present
         restart: yes
         include_sub_features: yes
         include_management_tools: yes
+
+    - name: Download webpage
+      win_get_url:
+        url: 'S3 buckets'
+        dest: 'C:/inetpub/wwwroot/index.html'

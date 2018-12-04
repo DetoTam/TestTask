@@ -1,8 +1,9 @@
 variable "name" {
   default = "deto"
 }
-variable "public_key" {
-  default = ""
+variable "key_path" {
+  description = "SSH Public Key path"
+  default = "C:/Users/roman.zhulia/.ssh/project_key_deto.pub"
 }
 
 variable "region" {
@@ -44,12 +45,12 @@ variable "vpc_cird" {
   description = "VPC cird block"
 }
 variable "route_cird" {
-  default = "10.1.0.0/22"
+  default = "192.168.0.0/23"
   description = "VPC cird block"
 }
 variable "subnet_cird" {
   type = "list"
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
+  default = ["10.0.0.0/24", "10.0.1.0/24"]
   description = "Subnet cird block"
 }
 variable "availability_zone" {

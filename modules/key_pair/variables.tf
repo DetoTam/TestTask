@@ -1,2 +1,2 @@
 variable "name" {}
-variable "public_key" {}
+variable "key_path" {}
