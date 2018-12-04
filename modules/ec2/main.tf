@@ -30,7 +30,7 @@ $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 powershell.exe -ExecutionPolicy ByPass -File $file
 
 winrm quickconfig -q
-winrm set winrm/config/winrs '@{MaxMemoryPerShellMB=”300″}'
+winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="300"}'
 winrm set winrm/config '@{MaxTimeoutms="1800000"}'
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 winrm set winrm/config/service/auth '@{Basic="true"}'
@@ -38,7 +38,7 @@ winrm set winrm/config/service/auth '@{Basic="true"}'
 netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
 netsh advfirewall firewall add rule name="IIS" protocol=TCP dir=in localport=8080 action=allow
 netsh advfirewall firewall add rule name="RDP" protocol=TCP dir=in localport=3389 action=allow
-netsh advfirewall set allprofiles state off
+
 net stop winrm
 sc.exe config winrm start=auto
 net start winrm
