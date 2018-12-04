@@ -1,3 +1,9 @@
-[windows]
-52.209.252.166 ansible_ssh_port: 5985 ansible_connection=winrm ansible_ssh_user=admin ansible_ssh_pass=123Abc+-=
-52.209.252.199 ansible_ssh_port: 5985 ansible_connection=winrm ansible_ssh_user=admin ansible_ssh_pass=123Abc+-=
+[win]
+52.209.252.166 
+
+[win:vars]
+ansible_user=admin
+ansible_password=123Abc+-=
+ansible_connection=winrm
+ansible_ssh_port=5985
+ansible_winrm_server_cert_validation=ignore
