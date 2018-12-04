@@ -1,3 +1,4 @@
+---
 ansible_user: admin
 ansible_password: 123Abc+-=
 ansible_port: 5985
