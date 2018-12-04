@@ -1,7 +1,7 @@
 [windows]
-52.209.252.166:5985
+52.209.252.166:5985     ansible_connection: winrm
 52.209.252.199:5985
-ec2-52-209-252-199.eu-west-1.compute.amazonaws.com:5985
+ec2-52-209-252-199.eu-west-1.compute.amazonaws.com:5985     ansible_connection: winrm
 ec2-52-209-252-166.eu-west-1.compute.amazonaws.com:5985
 
 
