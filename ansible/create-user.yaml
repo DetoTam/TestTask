@@ -6,6 +6,6 @@
     - name: Add User
       win_user:
         name: ansible
-        password: "@ns1bl3"
-        groups: administrators append=yes
+        password: "A@ns1bl32"
+        groups: Administrators append=yes
         state: present
