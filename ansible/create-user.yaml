@@ -6,7 +6,7 @@
     - name: Creating user ansible
       win_user:
         name: ansible
-        password: {{ upassword | password_hash('sha512') }}
+        password: "{{upassword | password_hash('sha512')}}"
         groups: admin append=yes
         state: present
       when:  assigned_role  == "yes"
