@@ -6,4 +6,4 @@ all:
       ansible_host: "52.213.193.145"
       ansible_port: 5985
       ansible_user: admin
-      ansible_ssh_pass=123Abc+-=
+      ansible_ssh_pass: 123Abc+-=

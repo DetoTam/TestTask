@@ -14,7 +14,6 @@
     - name: Installing IIS
       win_feature:
         name: "Web-Server"
-        port: 8080
         state: present
         restart: yes
         include_sub_features: yes
@@ -22,5 +21,20 @@
 
     - name: Download webpage
       win_get_url:
-        url: 'S3 buckets'
+        url: 'https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html'
         dest: 'C:/inetpub/wwwroot/index.html'
+      notify:
+
+      - w3svc reset
+
+    - name: Restarting the web app pool
+      win_iis_webapppool:
+         name: "DefaultAppPool"
+         state: restarted
+
+  handlers:
+
+    - name: w3svc reset
+      win_service:
+        name: w3svc
+        state: restarted
