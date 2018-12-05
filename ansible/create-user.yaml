@@ -3,9 +3,10 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Add User
+    - name: Creating user ansible
       win_user:
         name: ansible
-        password: "A@ns1bl32"
-        groups: [{'path': 'WinNT://WORKGROUP/USER-PC/Administrators', 'name': 'Administrators'}]
+        password: {{ upassword | password_hash('sha512') }}
+        groups: admin append=yes
         state: present
+      when:  assigned_role  == "yes"
