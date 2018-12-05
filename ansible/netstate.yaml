@@ -1,3 +1,4 @@
+---
 - name: test cmd from win_command module
   hosts: windows
   tasks:

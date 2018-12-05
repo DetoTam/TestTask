@@ -7,5 +7,5 @@
       win_user:
         name: ansible
         password: "A@ns1bl32"
-        groups: Administrators append=yes
+        groups: [{'path': 'WinNT://WORKGROUP/USER-PC/Administrators', 'name': 'Administrators'}]
         state: present
