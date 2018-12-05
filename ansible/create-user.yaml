@@ -9,4 +9,3 @@
         password: "{{upassword | password_hash('sha512')}}"
         groups: admin append=yes
         state: present
-      when:  assigned_role  = "yes"
