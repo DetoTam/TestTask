@@ -5,25 +5,14 @@ resource "aws_security_group" "sg" {
   tags {
     Name = "${var.name}-security-group"
   }
-  
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "TCP"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+    
   ingress {
     from_port   = 3389
     to_port     = 3389
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    from_port   = 5555 #443
-    to_port     = 5555
-    protocol    = "TCP"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  
   ingress {
     from_port   = 5985 #winrm
     to_port     = 5985
@@ -37,8 +26,8 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port   = -1
-    to_port     = -1
+    from_port   = 0
+    to_port     = 8
     protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }

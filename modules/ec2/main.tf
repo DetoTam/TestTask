@@ -36,6 +36,7 @@ winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 winrm set winrm/config/service/auth '@{Basic="true"}'
 
 netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
+netsh advfirewall firewall add rule name="WinRM 5986" protocol=TCP dir=in localport=5986 action=allow
 netsh advfirewall firewall add rule name="RDP" protocol=TCP dir=in localport=3389 action=allow
 netsh advfirewall set allprofiles state off
 
