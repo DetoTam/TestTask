@@ -2,10 +2,14 @@
 - name: Add a user
   hosts: all
   gather_facts: false
+  vars:
+   my_pass: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
   tasks:
     - name: Creating user ansible
       win_user:
         name: ansible
-        password: 
+        password: "{{ my_pass }}"
         groups: admin append=yes
         state: present
+    - debug:
+      msg: "{{ my_pass }}"
