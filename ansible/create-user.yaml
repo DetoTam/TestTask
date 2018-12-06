@@ -1,4 +1,10 @@
 ---
+- hosts: windows
+
+  tasks:
+    - name: Test connection
+      win_ping:
+
 - name: Add a user
   hosts: all
   gather_facts: false
