@@ -18,7 +18,7 @@
   - name: default-website-index
     win_copy:
       src: "C:\\inetpub\\wwwroot\\index.html"
-      dest: "C:\\inetpub\\wwwroot\\index.html"
+      dest: "c:\\inetpub\\wwwroot\\ansibletest"
 
   - name: create new website's directory
     win_file: path={{ ansible_site_path }} state=directory
@@ -27,6 +27,7 @@
       name: "Ansible Test Site"
       state: started
       port: 8080
+      ip: 127.0.0.1
       physical_path: "{{ ansible_site_path }}"
   - name: Open site's port on firewall
     win_firewall_rule:
@@ -40,15 +41,15 @@
       force: true
     tags: firewall
 
-  - name: create deploy staging path
-    win_file: path={{ ansible_test_staging_path }} state=directory
-  - name: get code to deploy staging path
-    win_copy:
-      src: files/site.zip
-      dest: "{{ ansible_test_staging_path }}"
-  - name: unzip code to site path
-    win_unzip:
-      src: "{{ ansible_test_staging_path }}\\site.zip"
-      dest: "{{ ansible_site_path }}"
-      creates: "{{ ansible_site_path }}\\index.html"
-    tags: unzip
+  # - name: create deploy staging path
+  #   win_file: path={{ ansible_test_staging_path }} state=directory
+  # - name: get code to deploy staging path
+  #   win_copy:
+  #     src: files/site.zip
+  #     dest: "{{ ansible_test_staging_path }}"
+  # - name: unzip code to site path
+  #   win_unzip:
+  #     src: "{{ ansible_test_staging_path }}\\site.zip"
+  #     dest: "{{ ansible_site_path }}"
+  #     creates: "{{ ansible_site_path }}\\index.html"
+  #   tags: unzip
