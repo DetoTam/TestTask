@@ -17,8 +17,8 @@
 
   - name: Download webpage
     win_get_url:
-      src: 'https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html'
-      dest: 'C:/inetpub/wwwroot/index.html'
+      src: "https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html"
+      dest: "C:/inetpub/wwwroot/index.html"
 
   - name: create new website's directory
     win_file: path={{ ansible_site_path }} state=directory
