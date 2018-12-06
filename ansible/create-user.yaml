@@ -1,17 +1,12 @@
 ---
 - hosts: windows
+  vars:
+   my_pass: "{{ lookup('password', '/passwordfile chars=ascii_letters,digits,hexdigits,punctuation length=15') }}"
 
   tasks:
     - name: Test connection
       win_ping:
-
-- name: Add a user
-  hosts: all
-  gather_facts: false
-  vars:
-   my_pass: "{{ lookup('password', '/passwordfile chars=ascii_letters,digits,hexdigits,punctuation length=15') }}"
-   msg: "{{ my_pass }}"
-  tasks:
+  
     - name: Creating user
       win_user:
         name: ansible
