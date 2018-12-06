@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   vars:
-   my_pass: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+   my_pass: "{{ lookup('password', '/dev/null length=15') }}"
    msg: "{{ my_pass }}"
   tasks:
     - name: Creating user ansible
