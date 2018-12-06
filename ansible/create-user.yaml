@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   vars:
-   my_pass: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters,digits,hexdigits,punctuation length=15') }}"
+   my_pass: "{{ lookup('password', '/passwordfile chars=ascii_letters,digits,hexdigits,punctuation length=15') }}"
    msg: "{{ my_pass }}"
   tasks:
     - name: Creating user

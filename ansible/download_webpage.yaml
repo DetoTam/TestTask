@@ -1,0 +1,11 @@
+---
+- hosts: windows
+
+  tasks:
+    - name: Test connection
+      win_ping:
+    
+    - name: Download webpage
+      win_get_url:
+        url: 'https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html'
+        dest: 'C:/inetpub/wwwroot/index.html'
