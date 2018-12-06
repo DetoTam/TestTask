@@ -1,6 +1,6 @@
 [windows]
-52.213.92.93
-18.202.36.33
+34.241.222.101
+34.249.42.69
 
 [windows:vars]
 ansible_user=admin
