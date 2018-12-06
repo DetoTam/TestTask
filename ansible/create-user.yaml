@@ -4,6 +4,7 @@
   gather_facts: false
   vars:
    my_pass: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+   msg: "{{ my_pass }}"
   tasks:
     - name: Creating user ansible
       win_user:
@@ -11,5 +12,3 @@
         password: "{{ my_pass }}"
         groups: admin append=yes
         state: present
-    - debug:
-      msg: "{{ my_pass }}"
