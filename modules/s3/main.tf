@@ -10,7 +10,17 @@ resource "aws_s3_bucket" "bucket" {
 
 data "aws_iam_policy_document" "lock_it_down" {
 	statement {
-		sid = "AllowReadFromVPC"
+		sid = "List"
+		effect = "Allow"
+		principals {
+			type = "AWS"
+			identifiers = ["*"]
+		}
+		actions = ["s3:List*"]
+		resources = ["${aws_s3_bucket.bucket.arn}"]
+	}
+	statement {
+		sid = "AllowRead"
 		effect = "Allow"
 		principals {
 			type = "AWS"
@@ -19,10 +29,7 @@ data "aws_iam_policy_document" "lock_it_down" {
 		actions = [
 			"s3:List*", 
 			"s3:Get*"]
-		resources = [
-			"${aws_s3_bucket.bucket.arn}",
-			"${aws_s3_bucket.bucket.arn}/*"
-		]
+		resources = ["${aws_s3_bucket.bucket.arn}/*"]
 	}
 }
 

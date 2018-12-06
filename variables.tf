@@ -26,20 +26,13 @@ variable "root_volume_type" {
 
 variable "admin_password" {
   description = "Windows Administrator password to login as."
-  default = "123Abc+-=" 
+  default = "" 
 }
 
 variable "instance_username" {
  default = "admin" 
 }
 
-# variable "acces_key" {
-#   default = "******"
-# }
-
-# variable "secret_key" {
-#   default = "******"
-#}
 variable "vpc_cird" {
   default = "10.0.0.0/16"
   description = "VPC cird block"

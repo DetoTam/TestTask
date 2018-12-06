@@ -1,16 +1,9 @@
 ---
 - hosts: windows
-
   tasks:
     - name: Test connection
       win_ping:
-
-# Restart snmp
-    - name: Ensuring SNMP is started
-      win_service:
-        name: snmptrap
-        state: started
-
+    
     - name: Installing IIS
       win_feature:
         name: "Web-Server"
