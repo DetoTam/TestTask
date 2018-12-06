@@ -5,18 +5,18 @@
     staging_path: "c:\\deploy"
     ansible_test_staging_path: "{{ staging_path }}\\ansible-test-site-{{ ansible_date_time.year }}{{ ansible_date_time.month }}{{ ansible_date_time.day }}"
   tasks:
-  - name: install-iis
-    win_feature:
-      name: "Web-Server"
-      state: present
-      restart: no
-      include_sub_features: yes
-      include_management_tools: no
+  # - name: install-iis
+  #   win_feature:
+  #     name: "Web-Server"
+  #     state: present
+  #     restart: no
+  #     include_sub_features: yes
+  #     include_management_tools: no
   - name: create staging path
     win_file: path={{ staging_path }} state=directory
 
-  - name: default-website-index
-    win_copy:
+  - name: Download webpage
+    win_get_url:
       src: 'https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html'
       dest: 'C:/inetpub/wwwroot/index.html'
 
