@@ -3,12 +3,14 @@
   hosts: all
   gather_facts: false
   vars:
-   my_pass: "{{ lookup('password', '/dev/null length=15') }}"
+   my_pass: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters,digits,hexdigits,punctuation length=15') }}"
    msg: "{{ my_pass }}"
   tasks:
-    - name: Creating user ansible
+    - name: Creating user
       win_user:
         name: ansible
         password: "{{ my_pass }}"
-        groups: admin append=yes
+        groups: 
+        - Administrators
+        groups_action: add
         state: present
