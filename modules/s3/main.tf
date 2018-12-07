@@ -1,14 +1,48 @@
-resource "aws_s3_bucket" "str" {
-  bucket = "${var.name}_bucket_str"
-  acl = "private"
+
+resource "aws_s3_bucket" "bucket" {
+	bucket = "${var.name}-bucket-tst"
+	acl = "private"
+    tags {
+        Name        = "${var.name}-bucket-tst"
+        Environment = "tst"
+  }
 }
 
-resource "aws_s3_bucket_object" "object" {
-  bucket = "${aws_s3_bucket.str.bucket}"
-  key = "<object key name>"
-  source = "./content"
+data "aws_iam_policy_document" "lock_it_down" {
+	statement {
+		sid = "List"
+		effect = "Allow"
+		principals {
+			type = "AWS"
+			identifiers = ["*"]
+		}
+		actions = ["s3:List*"]
+		resources = ["${aws_s3_bucket.bucket.arn}"]
+	}
+	statement {
+		sid = "AllowRead"
+		effect = "Allow"
+		principals {
+			type = "AWS"
+			identifiers = ["*"]
+		}
+		actions = [
+			"s3:List*", 
+			"s3:Get*"]
+		resources = ["${aws_s3_bucket.bucket.arn}/*"]
+	}
 }
+
+resource "aws_s3_bucket_policy" "repo" {
+	bucket = "${aws_s3_bucket.bucket.bucket}"
+	policy = "${data.aws_iam_policy_document.lock_it_down.json}"
+}
+
 
 output "s3_name" {
-    value = "${aws_s3_bucket.test.bucket}"
+    value = "${aws_s3_bucket.bucket.bucket}"
 }
+output "s3_bucket_id" {
+  value = "${aws_s3_bucket.bucket.id}"
+}
+

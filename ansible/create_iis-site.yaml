@@ -1,0 +1,36 @@
+---
+- hosts: windows
+  vars:
+    path: 'c:/inetpub/wwwroot/ansibletest'
+  
+  tasks:
+    - name: Test connection
+      win_ping:
+    
+    - name: Create path
+      win_file: path={{ path }} state=directory      
+
+    - name: Download webpage
+      win_get_url:
+        url: 'https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html'
+        dest: 'C:/inetpub/wwwroot/ansibletest/index.html'
+
+    - name:
+      win_iis_website:
+        name: "Test Site"
+        ip: 127.0.0.1
+        physical_path: 'C:/inetpub/wwwroot/ansibletest/index.html'
+        state: started
+        port: 8080
+    
+    - name: Open site's port on firewall
+      win_firewall_rule:
+        name: tstsite8080
+        enable: yes
+        state: present
+        localport: 8080
+        action: Allow
+        direction: In
+        protocol: Tcp
+        force: true
+      tags: firewall  

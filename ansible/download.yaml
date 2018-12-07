@@ -1,0 +1,17 @@
+---
+- hosts: windows
+  vars:
+    path: "c:\\inetpub\\wwwroot\\ansibletest"
+
+  tasks:
+      
+    - name: Test connection
+      win_ping:
+
+    - name: create staging path
+      win_file: path={{ path }} state=directory      
+
+    - name: Download webpage
+      win_get_url:
+        url: 'https://s3-eu-west-1.amazonaws.com/deto-bucket-tst/index.html'
+        dest: 'C:/inetpub/wwwroot/ansibletest/index.html'
