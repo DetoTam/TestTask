@@ -38,7 +38,7 @@ variable "vpc_cird" {
   description = "VPC cird block"
 }
 variable "route_cird" {
-  default = "192.168.0.0/23"
+  default = "10.0.0.0/16"
   description = "VPC cird block"
 }
 variable "subnet_cird" {
