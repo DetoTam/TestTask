@@ -18,9 +18,10 @@
     - name:
       win_iis_website:
         name: "Test Site"
-        physical_path: 'C:/inetpub/wwwroot/ansibletest/index.html'
+        physical_path: 'C:/inetpub/wwwroot/ansibletest/'
         state: started
         port: 8080
+      register: website
     
     - name: Open site's port on firewall
       win_firewall_rule:
@@ -34,13 +35,3 @@
         protocol: Tcp
         force: true
       tags: firewall
-    
-    - name: Add IIS_IUSRS allow rights
-      win_acl:
-        path: 'C:/inetpub/wwwroot/ansibletest/'
-        user: IIS_IUSRS
-        rights: FullControl
-        type: allow
-        state: present
-        inherit: ContainerInherit, ObjectInherit
-        propagation: 'None'
