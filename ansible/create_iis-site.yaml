@@ -20,7 +20,6 @@
         name: "Test Site"
         physical_path: 'C:/inetpub/wwwroot/ansibletest/index.html'
         state: started
-        hostname: "ansible_test_for_test.com"
         port: 8080
     
     - name: Open site's port on firewall
@@ -36,13 +35,12 @@
         force: true
       tags: firewall
     
-    - name: Restarting the web app pool
-      win_iis_webapppool:
-         name: "DefaultAppPool"
-         state: restarted
-
-  handlers:
-    - name: w3svc reset
-      win_service:
-        name: w3svc
-        state: restarted
+    - name: Add IIS_IUSRS allow rights
+      win_acl:
+        path: 'C:/inetpub/wwwroot/ansibletest/'
+        user: IIS_IUSRS
+        rights: FullControl
+        type: allow
+        state: present
+        inherit: ContainerInherit, ObjectInherit
+        propagation: 'None'
