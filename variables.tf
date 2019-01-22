@@ -3,7 +3,7 @@ variable "name" {
 }
 variable "key_path" {
   description = "SSH Public Key path"
-  default = "C:/Users/roman.zhulia/.ssh/project_key_deto.pub"
+  default = "C:/Users/us/.ssh/project_key_deto.pub"
 }
 
 variable "region" {
